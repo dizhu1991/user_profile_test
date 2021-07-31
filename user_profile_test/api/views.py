@@ -7,9 +7,9 @@ from django.contrib.auth.password_validation import validate_password
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import status, mixins
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.decorators import action
 
 from user_profile_test.models import MyUser
 from user_profile_test.api.serializers import MyUserSerializer
@@ -27,7 +27,7 @@ class MyUserViewSet(
     """API ViewSet to handle requests about MyUser model."""
     serializer_class = MyUserSerializer
     queryset = MyUser.objects.all()
-    permission_classes = []
+    permission_classes = [IsAuthenticated, ]
     pagination_class = PageNumberPagination
     authentication_classes = (JWTAuthentication,)
 

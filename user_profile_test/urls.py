@@ -27,5 +27,5 @@ urlpatterns += [
             TokenObtainPairView.as_view(), name='token_obtain_pair'),
     re_path(r'^api/token/refresh/',
             TokenRefreshView.as_view(), name='token_refresh'),
-    re_path(r'^api/user/', include('user_profile_test.api.urls')),
+    re_path(r'^api/users/', include('user_profile_test.api.urls')),
 ]
