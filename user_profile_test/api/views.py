@@ -8,8 +8,11 @@ from rest_framework.viewsets import GenericViewSet
 from rest_framework import status, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.decorators import action
 from rest_framework.pagination import PageNumberPagination
+
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from user_profile_test.models import MyUser
 from user_profile_test.api.serializers import MyUserSerializer
@@ -83,3 +86,32 @@ class MyUserViewSet(
             },
             status=status.HTTP_201_CREATED
         )
+
+    @action(methods=['POST'], detail=True,
+            parser_classes=[MultiPartParser, FormParser, ])
+    def upload_profile_pic(self, request, *args, **kwargs):
+        """Post method for uploading a profile picture to a user."""
+        user_obj = self.get_object()
+        file = request.data.get('profile_picture')
+        if file.size > 1000000:
+            return Response(
+                {
+                    'code': 400,
+                    'message': 'File size bigger than 1 MB. Please choose a '
+                               'smaller image.'
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        serializer = self.get_serializer(
+            user_obj, data=request.data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
+
+    @action(methods=['GET'], detail=False)
+    def get_all_pics(self, request, *args, **kwargs):
+        """List all picture urls."""
+        all_users = MyUser.objects.all()
+        pictures = [user.profile_picture.url for user in all_users
+                    if user.profile_picture]
+        return Response({'profile_pictures': pictures})

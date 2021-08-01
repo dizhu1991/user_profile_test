@@ -1,3 +1,5 @@
+import shortuuid
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
@@ -42,6 +44,12 @@ class MyUser(AbstractUser):
                               unique=True, blank=False, db_index=True)
     age = models.PositiveIntegerField(blank=True, null=True)
     gender = models.CharField(choices=GENDER_CHOICES, blank=True, max_length=25)
+    profile_picture = models.ImageField(
+        _("Profile Picture"),
+        upload_to='users/profile_pic/{}'.format(
+            shortuuid.ShortUUID().random(length=7)),
+        blank=True, null=True
+    )
     username = None
 
     USERNAME_FIELD = 'email'
