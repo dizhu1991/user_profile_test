@@ -1,12 +1,12 @@
-from django.conf.urls import re_path, include
-from rest_framework.routers import SimpleRouter
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 
 from user_profile_test.api.views import MyUserViewSet
 
-router = SimpleRouter()
+router = DefaultRouter()
 
 router.register(r'user', MyUserViewSet, basename='user')
 
 urlpatterns = [
-    re_path(r'^', include(router.urls)),
+    path('', include(router.urls)),
 ]

@@ -23,9 +23,9 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    re_path(r'^api/token/',
+    path('api/token/',
             TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    re_path(r'^api/token/refresh/',
+    path('api/token/refresh/',
             TokenRefreshView.as_view(), name='token_refresh'),
-    re_path(r'^api/users/', include('user_profile_test.api.urls')),
+    path('api/users/', include('user_profile_test.api.urls')),
 ]

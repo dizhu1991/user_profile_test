@@ -1,5 +1,5 @@
-Django==2.2.24
-djangorestframework==3.12.4
-djangorestframework-simplejwt==4.6.0
-pillow==8.0
-shortuuid==1.0.0
+Django==4.2.1
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.2.2
+pillow==9.5.0
+shortuuid==1.0.11
