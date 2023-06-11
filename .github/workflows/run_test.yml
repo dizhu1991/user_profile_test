@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
-        with:
+        env:
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
         run: |
           python -m pip install --upgrade pip
