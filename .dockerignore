@@ -4,7 +4,7 @@
 .docker
 
 media/
-.env/
+user_profile_test/.env/
 .venv/
 venv/
 app/__pycache__/
