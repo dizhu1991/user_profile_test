@@ -1,0 +1,13 @@
+.gitignore
+.git
+
+.docker
+
+media/
+user_profile_test/.env/
+.venv/
+venv/
+app/__pycache__/
+app/*/__pycache__/
+app/*/*/__pycache__/
+app/*/*/*/__pycache__/
