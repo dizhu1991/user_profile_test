@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 from datetime import timedelta
 
-from .local_settings import *
-
 
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
