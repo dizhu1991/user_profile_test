@@ -18,7 +18,7 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
-
+#TODO: figure out how to properly do env variables
 SECRET_KEY = 'this-is-not-it'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
